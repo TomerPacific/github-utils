@@ -13,10 +13,16 @@ main {
 
 #repositories > li > div {
     display: inline-block;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 #repositories > li > div > a {
     text-decoration: none;
+    color:black;
+}
+
+#repositories > li > div > a:hover {
+    color:lightgreen;
 }
 
 
@@ -29,5 +35,5 @@ footer {
     bottom: 0;
     position: fixed;
     text-align: center;
-    font-family: 'IBM Plex Sans', sans-serif;    ;
+    font-family: 'IBM Plex Sans', sans-serif;
 }

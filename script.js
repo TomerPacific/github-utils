@@ -1,17 +1,13 @@
 
 const GITHUB_REPOSITORIES_URL = "https://api.github.com/users/"
 const GET_REQUEST = "GET";
+const LINK_TARGET_BLANK = "_blank";
 const READY_STATE_OK = 4;
 const RESPONSE_STATUS_OK = 200;
 let request = null;
 
 let usernameInput = document.getElementById('username_input');
 let repositoriesList = document.getElementById('repositories');
-
-//name
-//html_url
-//description
-//stargazers_url
 
 function fetchUserRepositories() {
     let username = usernameInput.value;
@@ -32,13 +28,15 @@ function fetchUserRepositories() {
 
                 //Repository Name
                 anchorElement.href = repository.html_url;
-                anchorElement.target= "_blank";
+                anchorElement.target = LINK_TARGET_BLANK;
                 anchorElement.innerHTML = repository.name;
 
                 //Repository Stars
                 stars.href = repository.html_url + '/stargazers';
-                stars.target = "_blank";
+                stars.target = LINK_TARGET_BLANK;
                 stars.innerHTML = '&#11088;';
+
+                divElement.title = repository.description;
 
                 divElement.appendChild(anchorElement);
                 divElement.appendChild(stars);

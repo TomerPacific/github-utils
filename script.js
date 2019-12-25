@@ -27,13 +27,23 @@ function fetchUserRepositories() {
                 let repository = repositories[index];
                 let liElement = document.createElement('li');
                 let anchorElement = document.createElement('a');
+                let stars = document.createElement('a');
                 let divElement = document.createElement('div');
+
+                //Repository Name
                 anchorElement.href = repository.html_url;
-                anchorElement.target="_blank";
+                anchorElement.target= "_blank";
                 anchorElement.innerHTML = repository.name;
-                liElement.appendChild(anchorElement);
-                divElement.appendChild(liElement);
-                repositoriesList.appendChild(divElement);
+
+                //Repository Stars
+                stars.href = repository.stargazers_url;
+                stars.target = "_blank";
+                stars.innerHTML = '&#11088;';
+
+                divElement.appendChild(anchorElement);
+                divElement.appendChild(stars);
+                liElement.appendChild(divElement);
+                repositoriesList.appendChild(liElement);
             }
         }
     }

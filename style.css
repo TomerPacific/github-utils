@@ -11,6 +11,15 @@ main {
     list-style: none;
 }
 
+#repositories > li > div {
+    display: inline-block;
+}
+
+#repositories > li > div > a {
+    text-decoration: none;
+}
+
+
 footer ul li {
     display: inline-block;
 }

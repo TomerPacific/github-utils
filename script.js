@@ -26,7 +26,11 @@ function fetchUserRepositories() {
             for (let index = 0; index < repositories.length; index++) {
                 let repository = repositories[index];
                 let liElement = document.createElement('li');
-                liElement.innerHTML = repository.name + ' | ' + repository.description;
+                let anchorElement = document.createElement('a');
+                anchorElement.href = repository.html_url;
+                anchorElement.target="_blank";
+                anchorElement.innerHTML = repository.name;
+                liElement.appendChild(anchorElement);
                 repositoriesList.appendChild(liElement);
             }
         }

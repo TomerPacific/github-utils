@@ -6,3 +6,7 @@ header {
 main {
     text-align: center;
 }
+
+#repositories {
+    list-style: none;
+}

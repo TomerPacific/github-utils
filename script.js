@@ -36,7 +36,7 @@ function fetchUserRepositories() {
                 anchorElement.innerHTML = repository.name;
 
                 //Repository Stars
-                stars.href = repository.stargazers_url;
+                stars.href = repository.html_url + '/stargazers';
                 stars.target = "_blank";
                 stars.innerHTML = '&#11088;';
 

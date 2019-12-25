@@ -7,6 +7,17 @@ main {
     text-align: center;
 }
 
-#repositories {
+#repositories, footer ul {
     list-style: none;
+}
+
+footer ul li {
+    display: inline-block;
+}
+
+footer {
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    text-align: center;
 }

@@ -24,6 +24,7 @@ function fetchUserRepositories() {
                 let liElement = document.createElement('li');
                 let anchorElement = document.createElement('a');
                 let stars = document.createElement('a');
+                let forks = document.createElement('a');
                 let divElement = document.createElement('div');
 
                 //Repository Name
@@ -36,10 +37,16 @@ function fetchUserRepositories() {
                 stars.target = LINK_TARGET_BLANK;
                 stars.innerHTML = '&#11088;';
 
+                //Fork
+                forks.href = '#';
+                forks.target = LINK_TARGET_BLANK;
+                forks.innerHTML = '&#127860;';
+
                 divElement.title = repository.description;
 
                 divElement.appendChild(anchorElement);
                 divElement.appendChild(stars);
+                divElement.appendChild(forks);
                 liElement.appendChild(divElement);
                 repositoriesList.appendChild(liElement);
             }

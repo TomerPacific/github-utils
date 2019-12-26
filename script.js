@@ -4,12 +4,20 @@ const GET_REQUEST = "GET";
 const LINK_TARGET_BLANK = "_blank";
 const READY_STATE_OK = 4;
 const RESPONSE_STATUS_OK = 200;
+const ENTER_KEY_CODE = 13;
 let request = null;
 
 let usernameInput = document.getElementById('username_input');
 let repositoriesList = document.getElementById('repositories');
 
-
+function setupInputListener() {
+    usernameInput.addEventListener("keyup", function(event) {
+        if (event.keyCode === ENTER_KEY_CODE) {
+            event.preventDefault();
+            fetchUserRepositories();
+        }
+    });
+}
 
 
 function parseRepositories(repositories) {
@@ -61,3 +69,6 @@ function fetchUserRepositories() {
         }
     }
 }
+
+
+setupInputListener();

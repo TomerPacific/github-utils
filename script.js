@@ -26,7 +26,6 @@ function parseRepositories(repositories) {
         let repository = repositories[index];
         let liElement = document.createElement('li');
         let anchorElement = document.createElement('a');
-        let stars = document.createElement('a');
         let forks = document.createElement('a');
         let divElement = document.createElement('div');
 
@@ -35,20 +34,17 @@ function parseRepositories(repositories) {
         anchorElement.target = LINK_TARGET_BLANK;
         anchorElement.innerHTML = repository.name;
         anchorElement.title = repository.description;
+        divElement.appendChild(anchorElement);
 
         //Repository Stars
-        stars.href = repository.html_url + '/stargazers';
-        stars.target = LINK_TARGET_BLANK;
-        stars.innerHTML = '&#11088;';
+        fetchStargazers(repository.stargazers_url, addStarToRepository.bind(null, repository, divElement));
 
         //Fork
         forks.href = '#';
         forks.target = LINK_TARGET_BLANK;
         forks.innerHTML = '&#127860;';
-
-        divElement.appendChild(anchorElement);
-        divElement.appendChild(stars);
         divElement.appendChild(forks);
+
         liElement.appendChild(divElement);
         repositoriesList.appendChild(liElement);
     }
@@ -66,6 +62,29 @@ function fetchUserRepositories() {
         if (this.readyState === READY_STATE_OK && this.status === RESPONSE_STATUS_OK) {
             let repositories = JSON.parse(this.responseText);
             parseRepositories(repositories);
+        }
+    }
+}
+
+function addStarToRepository(repository, divElement) {
+    let stars = document.createElement('a');
+    stars.href = repository.html_url + '/stargazers';
+    stars.target = LINK_TARGET_BLANK;
+    stars.innerHTML = '&#11088;';
+    divElement.appendChild(stars);
+}
+
+function fetchStargazers(stargazers_url, successCallback) {
+    request = new XMLHttpRequest();
+    request.open(GET_REQUEST, stargazers_url);
+    request.send(null);
+
+    request.onreadystatechange = function() {
+        if (this.readyState === READY_STATE_OK && this.status === RESPONSE_STATUS_OK) {
+            let stargazers = JSON.parse(this.responseText);
+            if (stargazers.length) {
+                successCallback();
+            }
         }
     }
 }

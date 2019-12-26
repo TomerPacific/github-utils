@@ -26,7 +26,6 @@ function parseRepositories(repositories) {
         let repository = repositories[index];
         let liElement = document.createElement('li');
         let anchorElement = document.createElement('a');
-        let forks = document.createElement('a');
         let divElement = document.createElement('div');
 
         //Repository Name
@@ -39,12 +38,8 @@ function parseRepositories(repositories) {
         //Repository Stars
         fetchStargazers(repository.stargazers_url, addStarToRepository.bind(null, repository, divElement));
 
-        //Fork
-        forks.href = '#';
-        forks.target = LINK_TARGET_BLANK;
-        forks.innerHTML = '&#127860;';
-        divElement.appendChild(forks);
-
+        fetchForks(repository.forks_url, addForkToRepository.bind(null, divElement));
+        
         liElement.appendChild(divElement);
         repositoriesList.appendChild(liElement);
     }
@@ -83,6 +78,29 @@ function fetchStargazers(stargazers_url, successCallback) {
         if (this.readyState === READY_STATE_OK && this.status === RESPONSE_STATUS_OK) {
             let stargazers = JSON.parse(this.responseText);
             if (stargazers.length) {
+                successCallback();
+            }
+        }
+    }
+}
+
+function addForkToRepository(divElement) {
+    let forks = document.createElement('a');
+    forks.href = '#';
+    forks.target = LINK_TARGET_BLANK;
+    forks.innerHTML = '&#127860;';
+    divElement.appendChild(forks);
+}
+
+function fetchForks(forks_url, successCallback) {
+    request = new XMLHttpRequest();
+    request.open(GET_REQUEST, forks_url);
+    request.send(null);
+
+    request.onreadystatechange = function() {
+        if (this.readyState === READY_STATE_OK && this.status === RESPONSE_STATUS_OK) {
+            let forks = JSON.parse(this.responseText);
+            if (forks.length) {
                 successCallback();
             }
         }

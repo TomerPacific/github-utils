@@ -9,6 +9,42 @@ let request = null;
 let usernameInput = document.getElementById('username_input');
 let repositoriesList = document.getElementById('repositories');
 
+function parseRepositories(repositories) {
+
+    for (let index = 0; index < repositories.length; index++) {
+        let repository = repositories[index];
+        let liElement = document.createElement('li');
+        let anchorElement = document.createElement('a');
+        let stars = document.createElement('a');
+        let forks = document.createElement('a');
+        let divElement = document.createElement('div');
+
+        //Repository Name
+        anchorElement.href = repository.html_url;
+        anchorElement.target = LINK_TARGET_BLANK;
+        anchorElement.innerHTML = repository.name;
+
+        //Repository Stars
+        stars.href = repository.html_url + '/stargazers';
+        stars.target = LINK_TARGET_BLANK;
+        stars.innerHTML = '&#11088;';
+
+        //Fork
+        forks.href = '#';
+        forks.target = LINK_TARGET_BLANK;
+        forks.innerHTML = '&#127860;';
+
+        divElement.title = repository.description;
+
+        divElement.appendChild(anchorElement);
+        divElement.appendChild(stars);
+        divElement.appendChild(forks);
+        liElement.appendChild(divElement);
+        repositoriesList.appendChild(liElement);
+    }
+}
+
+
 function fetchUserRepositories() {
     let username = usernameInput.value;
     request = new XMLHttpRequest();
@@ -19,37 +55,7 @@ function fetchUserRepositories() {
     request.onreadystatechange = function() {
         if (this.readyState === READY_STATE_OK && this.status === RESPONSE_STATUS_OK) {
             let repositories = JSON.parse(this.responseText);
-            for (let index = 0; index < repositories.length; index++) {
-                let repository = repositories[index];
-                let liElement = document.createElement('li');
-                let anchorElement = document.createElement('a');
-                let stars = document.createElement('a');
-                let forks = document.createElement('a');
-                let divElement = document.createElement('div');
-
-                //Repository Name
-                anchorElement.href = repository.html_url;
-                anchorElement.target = LINK_TARGET_BLANK;
-                anchorElement.innerHTML = repository.name;
-
-                //Repository Stars
-                stars.href = repository.html_url + '/stargazers';
-                stars.target = LINK_TARGET_BLANK;
-                stars.innerHTML = '&#11088;';
-
-                //Fork
-                forks.href = '#';
-                forks.target = LINK_TARGET_BLANK;
-                forks.innerHTML = '&#127860;';
-
-                divElement.title = repository.description;
-
-                divElement.appendChild(anchorElement);
-                divElement.appendChild(stars);
-                divElement.appendChild(forks);
-                liElement.appendChild(divElement);
-                repositoriesList.appendChild(liElement);
-            }
+            parseRepositories(repositories);
         }
     }
 }

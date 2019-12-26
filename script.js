@@ -9,6 +9,9 @@ let request = null;
 let usernameInput = document.getElementById('username_input');
 let repositoriesList = document.getElementById('repositories');
 
+
+
+
 function parseRepositories(repositories) {
 
     for (let index = 0; index < repositories.length; index++) {
@@ -23,6 +26,7 @@ function parseRepositories(repositories) {
         anchorElement.href = repository.html_url;
         anchorElement.target = LINK_TARGET_BLANK;
         anchorElement.innerHTML = repository.name;
+        anchorElement.title = repository.description;
 
         //Repository Stars
         stars.href = repository.html_url + '/stargazers';
@@ -33,8 +37,6 @@ function parseRepositories(repositories) {
         forks.href = '#';
         forks.target = LINK_TARGET_BLANK;
         forks.innerHTML = '&#127860;';
-
-        divElement.title = repository.description;
 
         divElement.appendChild(anchorElement);
         divElement.appendChild(stars);

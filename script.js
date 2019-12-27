@@ -19,6 +19,20 @@ function setupInputListener() {
     });
 }
 
+function fetchUserRepositories() {
+    let username = usernameInput.value;
+    request = new XMLHttpRequest();
+    let url = GITHUB_REPOSITORIES_URL + username + '/repos?per_page=100';
+    request.open(GET_REQUEST, url);
+    request.send(null);
+
+    request.onreadystatechange = function() {
+        if (this.readyState === READY_STATE_OK && this.status === RESPONSE_STATUS_OK) {
+            let repositories = JSON.parse(this.responseText);
+            parseRepositories(repositories);
+        }
+    }
+}
 
 function parseRepositories(repositories) {
 
@@ -36,29 +50,63 @@ function parseRepositories(repositories) {
         divElement.appendChild(anchorElement);
 
         //Repository Stars
-        fetchStargazers(repository.stargazers_url, addStarToRepository.bind(null, repository, divElement));
+        fetchStargazers(repository.stargazers_url)
+        .then(function(stargazersLength) {
+            if (stargazersLength > 0) {
+                addStarToRepository(repository, divElement);
+            }
+        })
+        .catch(function(error) {
+            console.error(error);
+        });
 
-        fetchForks(repository.forks_url, addForkToRepository.bind(null, divElement));
-        
+        fetchForks(repository.forks_url)
+        .then(function(forksLength) {
+            if (forksLength > 0) {
+                addForkToRepository(divElement);
+            }
+        })
+        .catch(function(error) {
+            console.error(error);
+        });
+
         liElement.appendChild(divElement);
         repositoriesList.appendChild(liElement);
+        
+        
+        
+        
     }
 }
 
-
-function fetchUserRepositories() {
-    let username = usernameInput.value;
+function fetchStargazers(stargazers_url) {
     request = new XMLHttpRequest();
-    let url = GITHUB_REPOSITORIES_URL + username + '/repos?per_page=100';
-    request.open(GET_REQUEST, url);
+    request.open(GET_REQUEST, stargazers_url);
     request.send(null);
 
-    request.onreadystatechange = function() {
-        if (this.readyState === READY_STATE_OK && this.status === RESPONSE_STATUS_OK) {
-            let repositories = JSON.parse(this.responseText);
-            parseRepositories(repositories);
+    return new Promise(function(resolve, reject) {
+        request.onreadystatechange = function() {
+            if (this.readyState === READY_STATE_OK && this.status === RESPONSE_STATUS_OK) {
+                let stargazers = JSON.parse(this.responseText);
+                resolve(stargazers.length);
+             }
         }
-    }
+    });
+}
+
+function fetchForks(forks_url) {
+    request = new XMLHttpRequest();
+    request.open(GET_REQUEST, forks_url);
+    request.send(null);
+
+    return new Promise(function(resolve, reject) {
+        request.onreadystatechange = function() {
+            if (this.readyState === READY_STATE_OK && this.status === RESPONSE_STATUS_OK) {
+                let forks = JSON.parse(this.responseText);
+                resolve(forks.length);
+            }
+        }
+    });
 }
 
 function addStarToRepository(repository, divElement) {
@@ -69,42 +117,12 @@ function addStarToRepository(repository, divElement) {
     divElement.appendChild(stars);
 }
 
-function fetchStargazers(stargazers_url, successCallback) {
-    request = new XMLHttpRequest();
-    request.open(GET_REQUEST, stargazers_url);
-    request.send(null);
-
-    request.onreadystatechange = function() {
-        if (this.readyState === READY_STATE_OK && this.status === RESPONSE_STATUS_OK) {
-            let stargazers = JSON.parse(this.responseText);
-            if (stargazers.length) {
-                successCallback();
-            }
-        }
-    }
-}
-
 function addForkToRepository(divElement) {
     let forks = document.createElement('a');
     forks.href = '#';
     forks.target = LINK_TARGET_BLANK;
     forks.innerHTML = '&#127860;';
     divElement.appendChild(forks);
-}
-
-function fetchForks(forks_url, successCallback) {
-    request = new XMLHttpRequest();
-    request.open(GET_REQUEST, forks_url);
-    request.send(null);
-
-    request.onreadystatechange = function() {
-        if (this.readyState === READY_STATE_OK && this.status === RESPONSE_STATUS_OK) {
-            let forks = JSON.parse(this.responseText);
-            if (forks.length) {
-                successCallback();
-            }
-        }
-    }
 }
 
 

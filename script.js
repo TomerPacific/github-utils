@@ -50,32 +50,30 @@ function parseRepositories(repositories) {
         divElement.appendChild(anchorElement);
 
         //Repository Stars
-        fetchStargazers(repository.stargazers_url)
-        .then(function(stargazersLength) {
-            if (stargazersLength > 0) {
-                addStarToRepository(repository, divElement);
+        let stargazersPromise = fetchStargazers(repository.stargazers_url)
+        
+
+        let forksPromise = fetchForks(repository.forks_url)
+        
+        Promise.all([stargazersPromise, forksPromise])
+        .then(function(results) {
+            for (let index = 0; index < results.length; index++) {
+                let result = results[index];
+                if (index % 2 === 0 && result > 0) {
+                    addStarToRepository(repository, divElement);
+                }
+
+                if (index % 2 !== 0 && result > 0) {
+                    addForkToRepository(divElement);
+                }
+                
+                liElement.appendChild(divElement);
+                repositoriesList.appendChild(liElement);
             }
         })
         .catch(function(error) {
             console.error(error);
         });
-
-        fetchForks(repository.forks_url)
-        .then(function(forksLength) {
-            if (forksLength > 0) {
-                addForkToRepository(divElement);
-            }
-        })
-        .catch(function(error) {
-            console.error(error);
-        });
-
-        liElement.appendChild(divElement);
-        repositoriesList.appendChild(liElement);
-        
-        
-        
-        
     }
 }
 

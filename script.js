@@ -2,6 +2,8 @@
 const GITHUB_REPOSITORIES_URL = "https://api.github.com/users/"
 const GET_REQUEST = "GET";
 const LINK_TARGET_BLANK = "_blank";
+const STAR_EMOJI = '&#11088;';
+const FORK_EMOJI = '&#127860;';
 const READY_STATE_OK = 4;
 const RESPONSE_STATUS_OK = 200;
 const ENTER_KEY_CODE = 13;
@@ -52,7 +54,7 @@ function parseRepositories(repositories) {
         //Repository Stars
         let stargazersPromise = fetchStargazers(repository.stargazers_url)
         
-
+        //Repository Forks
         let forksPromise = fetchForks(repository.forks_url)
         
         Promise.all([stargazersPromise, forksPromise])
@@ -66,7 +68,7 @@ function parseRepositories(repositories) {
                 if (index % 2 !== 0 && result > 0) {
                     addForkToRepository(divElement);
                 }
-                
+
                 liElement.appendChild(divElement);
                 repositoriesList.appendChild(liElement);
             }
@@ -111,7 +113,7 @@ function addStarToRepository(repository, divElement) {
     let stars = document.createElement('a');
     stars.href = repository.html_url + '/stargazers';
     stars.target = LINK_TARGET_BLANK;
-    stars.innerHTML = '&#11088;';
+    stars.innerHTML = STAR_EMOJI;
     divElement.appendChild(stars);
 }
 
@@ -119,7 +121,7 @@ function addForkToRepository(divElement) {
     let forks = document.createElement('a');
     forks.href = '#';
     forks.target = LINK_TARGET_BLANK;
-    forks.innerHTML = '&#127860;';
+    forks.innerHTML = FORK_EMOJI;
     divElement.appendChild(forks);
 }
 

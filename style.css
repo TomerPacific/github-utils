@@ -9,11 +9,12 @@ main {
 
 #repositories, footer ul {
     list-style: none;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 #repositories > li > div {
     display: inline-block;
-    font-family: 'IBM Plex Sans', sans-serif;
+    
 }
 
 #repositories > li > div > a {

@@ -44,9 +44,11 @@ function fetchUserRepositories() {
             let repositories = JSON.parse(this.responseText);
             parseRepositories(repositories);
         } else if (this.readyState === READY_STATE_OK && this.status === RESPONSE_STATUS_NOT_FOUND) {
+            let divElement = document.createElement('div');
             let liElement = document.createElement('li');
             liElement.innerHTML = "User has not been found";
-            repositoriesList.appendChild(liElement);
+            divElement.appendChild(liElement);
+            repositoriesList.appendChild(divElement);
         }
     }
 }

@@ -1,3 +1,11 @@
+.bg {
+    background: url('assets/bg-opaque.png');
+    height: 100%; 
+    background-position: center;
+    background-repeat: repeat;
+    background-size: contain;
+}
+
 header {
     text-align: center;
     font-family: 'Fruktur', cursive;
@@ -17,9 +25,14 @@ main {
     
 }
 
-#repositories > li > div > a, footer > ul > li > a {
+#repositories > li > div > a {
     text-decoration: none;
-    color:black;
+    color:blue;
+}
+
+footer > ul > li > a {
+    text-decoration: none;
+    color: black;
 }
 
 

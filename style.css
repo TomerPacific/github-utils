@@ -17,12 +17,14 @@ main {
     
 }
 
-#repositories > li > div > a {
+#repositories > li > div > a, footer > ul > li > a {
     text-decoration: none;
     color:black;
 }
 
-#repositories > li > div > a:hover {
+
+
+#repositories > li > div > a:hover, footer > ul > li > a:hover {
     color:lightgreen;
 }
 
@@ -48,6 +50,10 @@ footer {
     cursor: pointer;
     text-decoration: none;
     color: black;
+}
+
+#about:hover {
+    color: lightgreen;
 }
 
 /* MODAL */

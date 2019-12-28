@@ -82,7 +82,7 @@ function parseRepositories(repositories) {
                 }
 
                 if (index % 2 !== 0 && result > 0) {
-                    addForkToRepository(divElement);
+                    addForkToRepository(repository, divElement);
                 }
 
                 liElement.appendChild(divElement);
@@ -130,12 +130,14 @@ function addStarToRepository(repository, divElement) {
     stars.href = repository.html_url + '/stargazers';
     stars.target = LINK_TARGET_BLANK;
     stars.innerHTML = STAR_EMOJI;
+    stars.title = repository.stargazers_count;
     divElement.appendChild(stars);
 }
 
-function addForkToRepository(divElement) {
+function addForkToRepository(repository, divElement) {
     let forks = document.createElement('span');
     forks.innerHTML = FORK_EMOJI;
+    forks.title = repository.forks_count;
     divElement.appendChild(forks);
 }
 

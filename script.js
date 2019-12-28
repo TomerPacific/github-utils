@@ -134,9 +134,7 @@ function addStarToRepository(repository, divElement) {
 }
 
 function addForkToRepository(divElement) {
-    let forks = document.createElement('a');
-    forks.href = '#';
-    forks.target = LINK_TARGET_BLANK;
+    let forks = document.createElement('span');
     forks.innerHTML = FORK_EMOJI;
     divElement.appendChild(forks);
 }

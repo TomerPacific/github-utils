@@ -6,6 +6,7 @@ const STAR_EMOJI = '&#11088;';
 const FORK_EMOJI = '&#127860;';
 const READY_STATE_OK = 4;
 const RESPONSE_STATUS_OK = 200;
+const RESPONSE_STATUS_NOT_FOUND = 404;
 const ENTER_KEY_CODE = 13;
 let request = null;
 
@@ -26,18 +27,31 @@ function fetchUserRepositories() {
     request = new XMLHttpRequest();
     let url = GITHUB_REPOSITORIES_URL + username + '/repos?per_page=100';
     request.open(GET_REQUEST, url);
-    request.send(null);
+    try {
+        request.send(null);
+    } catch(exception) {
+        console.error(exception);
+    }
+    
 
     request.onreadystatechange = function() {
         if (this.readyState === READY_STATE_OK && this.status === RESPONSE_STATUS_OK) {
+
+            while(repositoriesList.firstChild) {
+                repositoriesList.removeChild(repositoriesList.firstChild);
+            }
+
             let repositories = JSON.parse(this.responseText);
             parseRepositories(repositories);
+        } else if (this.readyState === READY_STATE_OK && this.status === RESPONSE_STATUS_NOT_FOUND) {
+            let liElement = document.createElement('li');
+            liElement.innerHTML = "User has not been found";
+            repositoriesList.appendChild(liElement);
         }
     }
 }
 
 function parseRepositories(repositories) {
-
     for (let index = 0; index < repositories.length; index++) {
         let repository = repositories[index];
         let liElement = document.createElement('li');

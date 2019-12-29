@@ -66,7 +66,9 @@ function parseRepositories(repositories) {
         anchorElement.innerHTML = repository.name;
         anchorElement.title = repository.description;
         divElement.appendChild(anchorElement);
+
         addLanguage(repository, divElement);
+        addCloneButton(repository, divElement);
         //Repository Stars
         let stargazersPromise = fetchStargazers(repository.stargazers_url)
         
@@ -146,6 +148,23 @@ function addLanguage(repository, divElement) {
     languageElement.innerHTML = repository.language;
     languageElement.classList.add(repository.language);
     divElement.appendChild(languageElement);
+}
+
+function addCloneButton(repository, divElement) {
+    let cloneElement = document.createElement('button');
+    cloneElement.innerHTML = 'Clone';
+    cloneElement.addEventListener('click', function() {
+        let element = document.createElement('textarea');
+        document.body.appendChild(element);
+        element.value = repository.clone_url;
+        element.select();
+        element.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        document.body.removeChild(element);
+    });
+
+    cloneElement.classList.add('clone');
+    divElement.appendChild(cloneElement);
 }
 
 

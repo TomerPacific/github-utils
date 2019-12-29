@@ -66,7 +66,7 @@ function parseRepositories(repositories) {
         anchorElement.innerHTML = repository.name;
         anchorElement.title = repository.description;
         divElement.appendChild(anchorElement);
-
+        addLanguage(repository, divElement);
         //Repository Stars
         let stargazersPromise = fetchStargazers(repository.stargazers_url)
         
@@ -139,6 +139,13 @@ function addForkToRepository(repository, divElement) {
     forks.innerHTML = FORK_EMOJI;
     forks.title = repository.forks_count;
     divElement.appendChild(forks);
+}
+
+function addLanguage(repository, divElement) {
+    let languageElement = document.createElement('span');
+    languageElement.innerHTML = repository.language;
+    languageElement.classList.add(repository.language);
+    divElement.appendChild(languageElement);
 }
 
 

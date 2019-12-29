@@ -106,3 +106,31 @@ footer {
     text-align: left;
   }
 
+
+/* Coding Language Spans */
+
+.Java {
+    background-color: #b07219;
+    border: 1px solid black;
+    border-radius: 15%;
+}
+
+.HTML {
+    background-color: #e34c26;
+    border: 1px solid black;
+    border-radius: 15%;
+}
+
+
+.CSS {
+    background-color: #563d7c;;
+    border: 1px solid black;
+    border-radius: 15%;
+}
+
+
+.JavaScript {
+    background-color: #f1e05a;
+    border: 1px solid black;
+    border-radius: 15%;
+}

@@ -1,5 +1,5 @@
 .bg {
-    background: url('assets/bg-opaque.png');
+    background: url('../assets/bg-opaque.png');
     height: 100%; 
     background-position: center;
     background-repeat: repeat;

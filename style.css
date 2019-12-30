@@ -21,7 +21,8 @@ main {
 }
 
 #repositories > li > div {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
 }
 
 #repositories > li > div > a {
@@ -33,8 +34,6 @@ footer > ul > li > a {
     text-decoration: none;
     color: black;
 }
-
-
 
 #repositories > li > div > a:hover, footer > ul > li > a:hover, #about:hover {
     color:lightgreen;
@@ -111,12 +110,14 @@ footer {
 .Java {
     background-color: #b07219;
     border: 1px solid black;
+    color:white;
     border-radius: 15%;
 }
 
 .HTML {
     background-color: #e34c26;
     border: 1px solid black;
+    color:white;
     border-radius: 15%;
 }
 
@@ -124,6 +125,7 @@ footer {
 .CSS {
     background-color: #563d7c;;
     border: 1px solid black;
+    color:white;
     border-radius: 15%;
 }
 
@@ -131,6 +133,7 @@ footer {
 .JavaScript {
     background-color: #f1e05a;
     border: 1px solid black;
+    color:white;
     border-radius: 15%;
 }
 

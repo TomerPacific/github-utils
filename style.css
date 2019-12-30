@@ -22,7 +22,6 @@ main {
 
 #repositories > li > div {
     display: inline-block;
-    
 }
 
 #repositories > li > div > a {

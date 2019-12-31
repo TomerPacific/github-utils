@@ -15,14 +15,10 @@ function setupInputListener() {
             while(repositoriesList.firstChild) {
                 repositoriesList.removeChild(repositoriesList.firstChild);
             }
-
-            fetchUserRepositories(usernameInput.value).then(function(repositories) {
+            let username = usernameInput.value;
+            fetchUserRepositories(username).then(function(repositories) {
                 if (repositories.length === 0) {
-                    let divElement = document.createElement('div');
-                    let liElement = document.createElement('li');
-                    liElement.innerHTML = "User has not been found";
-                    divElement.appendChild(liElement);
-                    repositoriesList.appendChild(divElement);
+                    addUserNotFoundIndication(username);
                     return;
                 }
                 parseRepositories(repositories);
@@ -31,7 +27,13 @@ function setupInputListener() {
     });
 }
 
-
+function addUserNotFoundIndication(username) {
+    let divElement = document.createElement('div');
+    let liElement = document.createElement('li');
+    liElement.innerHTML = "User " + username + " has not been found";
+    divElement.appendChild(liElement);
+    repositoriesList.appendChild(divElement);
+}
 
 function parseRepositories(repositories) {
     for (let index = 0; index < repositories.length; index++) {

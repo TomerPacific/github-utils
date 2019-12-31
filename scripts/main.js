@@ -79,36 +79,6 @@ function parseRepositories(repositories) {
     }
 }
 
-function fetchStargazers(stargazers_url) {
-    request = new XMLHttpRequest();
-    request.open(GET_REQUEST, stargazers_url);
-    request.send(null);
-
-    return new Promise(function(resolve, reject) {
-        request.onreadystatechange = function() {
-            if (this.readyState === READY_STATE_OK && this.status === RESPONSE_STATUS_OK) {
-                let stargazers = JSON.parse(this.responseText);
-                resolve(stargazers.length);
-             }
-        }
-    });
-}
-
-function fetchForks(forks_url) {
-    request = new XMLHttpRequest();
-    request.open(GET_REQUEST, forks_url);
-    request.send(null);
-
-    return new Promise(function(resolve, reject) {
-        request.onreadystatechange = function() {
-            if (this.readyState === READY_STATE_OK && this.status === RESPONSE_STATUS_OK) {
-                let forks = JSON.parse(this.responseText);
-                resolve(forks.length);
-            }
-        }
-    });
-}
-
 function addStarToRepository(repository, divElement) {
     let stars = document.createElement('a');
     stars.href = repository.html_url + '/stargazers';

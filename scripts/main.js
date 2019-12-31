@@ -117,9 +117,11 @@ function addCloneButton(repository, divElement) {
         element.setSelectionRange(0, 99999);
         document.execCommand("copy");
         document.body.removeChild(element);
+        alert("Copied to clipboard!");
     });
 
     cloneElement.classList.add('clone');
+    
     divElement.appendChild(cloneElement);
 }
 

@@ -3,6 +3,7 @@ const LINK_TARGET_BLANK = "_blank";
 const STAR_EMOJI = '&#11088;';
 const FORK_EMOJI = '&#127860;';
 const ENTER_KEY_CODE = 13;
+const CODING_LANGUAGE_CSS_CLASS = 'coding-language';
 
 let usernameInput = document.getElementById('username_input');
 let repositoriesList = document.getElementById('repositories');
@@ -102,6 +103,7 @@ function addLanguage(language, divElement) {
 
     let languageElement = document.createElement('span');
     languageElement.innerHTML = language;
+    languageElement.classList.add(CODING_LANGUAGE_CSS_CLASS);
     languageElement.classList.add(language);
     divElement.appendChild(languageElement);
 }

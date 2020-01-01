@@ -108,48 +108,35 @@ footer {
 
 /* Coding Language Spans */
 
-.Java {
-    background-color: #b07219;
+.coding-language {
     border: 1px solid black;
     color:white;
     border-radius: 15%;
+}
+
+.Java {
+    background-color: #b07219;
 }
 
 .HTML {
     background-color: #e34c26;
-    border: 1px solid black;
-    color:white;
-    border-radius: 15%;
 }
-
 
 .CSS {
     background-color: #563d7c;;
-    border: 1px solid black;
-    color:white;
-    border-radius: 15%;
 }
 
 
 .JavaScript {
     background-color: #f1e05a;
-    border: 1px solid black;
-    color:white;
-    border-radius: 15%;
 }
 
 .Vue {
     background-color: #2c3e50;
-    border: 1px solid black;
-    color:white;
-    border-radius: 15%;
 }
 
 .Dart {
     background-color: #00B4AB;
-    border: 1px solid black;
-    color:white;
-    border-radius: 15%;
 }
 
 .clone {

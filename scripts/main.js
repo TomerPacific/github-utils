@@ -113,6 +113,12 @@ function addLanguage(language, divElement) {
 function addCloneButton(repository, divElement) {
     let cloneElement = document.createElement('button');
     cloneElement.innerHTML = 'Clone';
+    cloneElement.setAttribute('data-toggle', "tooltip");
+    cloneElement.setAttribute('data-placement', "right");
+    cloneElement.title = "Copy to Clipboard";
+
+    cloneElement.classList.add('clone');
+
     cloneElement.addEventListener('click', function() {
         let element = document.createElement('textarea');
         document.body.appendChild(element);
@@ -121,10 +127,8 @@ function addCloneButton(repository, divElement) {
         element.setSelectionRange(0, 99999);
         document.execCommand("copy");
         document.body.removeChild(element);
-        alert("Copied to clipboard!");
+        this.title = 'Copied!';
     });
-
-    cloneElement.classList.add('clone');
     
     divElement.appendChild(cloneElement);
 }

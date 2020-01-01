@@ -100,6 +100,8 @@ function addLanguage(language, divElement) {
     if (!language) {
         return;
     }
+    
+    language = language === 'JavaScript' ? 'JS' : language;
 
     let languageElement = document.createElement('span');
     languageElement.innerHTML = language;

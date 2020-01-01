@@ -112,6 +112,8 @@ footer {
     border: 1px solid black;
     color:white;
     border-radius: 15%;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .Java {

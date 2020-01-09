@@ -2,6 +2,7 @@
 const LINK_TARGET_BLANK = "_blank";
 const STAR_EMOJI = '&#11088;';
 const FORK_EMOJI = '&#127860;';
+const EYE_EMOJI = '&#x1F441;';
 const ENTER_KEY_CODE = 13;
 const CODING_LANGUAGE_CSS_CLASS = 'coding-language';
 
@@ -52,6 +53,7 @@ function parseRepositories(repositories) {
 
         addLanguage(repository.language, divElement);
         addCloneButton(repository, divElement);
+        addWatchersIcon(repository, divElement);
         //Repository Stars
         let stargazersPromise = fetchStargazers(repository.stargazers_url)
         
@@ -131,6 +133,18 @@ function addCloneButton(repository, divElement) {
     });
     
     divElement.appendChild(cloneElement);
+}
+
+function addWatchersIcon(repository, divElement) {
+
+    if (!repository.watchers) {
+        return;
+    }
+
+    let watchersElement = document.createElement('span');
+    watchersElement.innerHTML = EYE_EMOJI;
+    watchersElement.title = repository.watchers;
+    divElement.appendChild(watchersElement);
 }
 
 

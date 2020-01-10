@@ -1,0 +1,65 @@
+.bg {
+    background: url('../assets/bg-opaque.png');
+    height: 100%; 
+    background-position: center;
+    background-repeat: repeat;
+    background-size: contain;
+}
+
+header {
+    text-align: center;
+    font-family: 'Fruktur', cursive;
+}
+
+main {
+    text-align: center;
+}
+
+#repositories, footer ul {
+    list-style: none;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+#repositories > li > div {
+    display: flex;
+    justify-content: center;
+}
+
+#repositories > li > div > a {
+    text-decoration: none;
+    color:blue;
+}
+
+footer > ul > li > a {
+    text-decoration: none;
+    color: black;
+}
+
+#repositories > li > div > a:hover, footer > ul > li > a:hover, #about:hover {
+    color:lightgreen;
+}
+
+
+footer ul li {
+    display: inline-block;
+}
+
+footer {
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    text-align: center;
+    font-family: 'IBM Plex Sans', sans-serif;
+    background-color:rgba(0, 0, 0, 0.41);
+}
+
+#about {
+    font-size: 1em;
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    font-family: 'IBM Plex Sans', sans-serif;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}

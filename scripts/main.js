@@ -8,6 +8,7 @@ const CODING_LANGUAGE_CSS_CLASS = 'coding-language';
 
 let usernameInput = document.getElementById('username_input');
 let repositoriesList = document.getElementById('repositories');
+let searchButton = document.getElementById('github_user_btn');
 
 function setupInputListener() {
     usernameInput.addEventListener("keyup", function(event) {
@@ -21,8 +22,13 @@ function setupInputListener() {
             fetchUserRepositories(username).then(function(repositories) {
                 if (repositories.length === 0) {
                     addUserNotFoundIndication(username);
+                    searchButton.innerHTML = 'Search Again?';
                     return;
                 }
+               
+                searchButton.classList.add('spinning');
+                searchButton.innerHTML = '&#8987;';
+                
                 parseRepositories(repositories);
             });
         }
@@ -54,6 +60,7 @@ function parseRepositories(repositories) {
         addLanguage(repository.language, divElement);
         addCloneButton(repository, divElement);
         addWatchersIcon(repository, divElement);
+
         //Repository Stars
         let stargazersPromise = fetchStargazers(repository.stargazers_url)
         
@@ -75,6 +82,9 @@ function parseRepositories(repositories) {
                 liElement.appendChild(divElement);
                 repositoriesList.appendChild(liElement);
             }
+
+            searchButton.classList.remove('spinning');
+            searchButton.innerHTML = 'Search Again?';
         })
         .catch(function(error) {
             console.error(error);

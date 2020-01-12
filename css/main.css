@@ -79,3 +79,21 @@
     background-repeat: no-repeat;
     background-size: contain;
 }
+
+span.spinning {
+    animation-name: spin;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: linear;
+    position: absolute;
+  }
+
+  @keyframes spin {
+    from { 
+        transform: rotate(0);
+     }
+
+    to { 
+        transform: rotate(360deg);
+     }
+}

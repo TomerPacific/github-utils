@@ -10,48 +10,54 @@
         <link rel="stylesheet" href="css/coding-languages.css">
     </head>
 
-    <header>
-        <h1>GitHub APIs</h1>
-    </header>
-
-    <main class="bg">
-
-        <div>
-            <input type="text" placeholder="Enter Username" id="username_input"/><button id="github_user_btn" onclick="fetchUserRepositories()">Search</button>
-        </div>
-        
-        <div>
-            <ul id="repositories">
-
-            </ul>
-        </div>
-
-        <div id="myModal" class="modal">
-            <div class="modal-content">
-              <span class="close">&times;</span>
-              <h2>How To Use</h2>
-              <ol id="modal-list">
-                  <li>Enter a valid username in GitHub</li>
-                  <li>Press the search button (or &crarr;)</li>
-                  <li>Hover over the repository's name, and you will see it's description</li>
-                  <li>Repositories with a &#11088; indicate a repository that has been starred</li>
-                  <li>Repositories with a &#127860; indicate a repository that has been forked from</li>
-                  <li>Repositories with a &#x1F441; indicate a repository that has watchers</li>
-                  <li>Hover over any emoji (&#11088;, &#127860;, &#x1F441;) to see the amount the repository has of that item</li>
-              </ol>
+    <body>
+        <div id="container" class="bg">
+            <div id="site-header">
+                <h1>GitHub APIs</h1>
             </div>
-          </div>
-    </main>
+            
+            <div id="site-content">
+                <div>
+                    <input type="text" placeholder="Enter Username" id="username_input"/><button id="github_user_btn" onclick="fetchUserRepositories()">Search</button>
+                </div>
+                
+                <div>
+                    <ul id="repositories">
+        
+                    </ul>
+                </div>
+        
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                      <span class="close">&times;</span>
+                      <h2>How To Use</h2>
+                      <ol id="modal-list">
+                          <li>Enter a valid username in GitHub</li>
+                          <li>Press the search button (or &crarr;)</li>
+                          <li>Hover over the repository's name, and you will see it's description</li>
+                          <li>Repositories with a &#11088; indicate a repository that has been starred</li>
+                          <li>Repositories with a &#127860; indicate a repository that has been forked from</li>
+                          <li>Repositories with a &#x1F441; indicate a repository that has watchers</li>
+                          <li>Hover over any emoji (&#11088;, &#127860;, &#x1F441;) to see the amount the repository has of that item</li>
+                      </ol>
+                    </div>
+                  </div>
+            </div>
+    
+            <div id="site-footer">
+                <ul>
+                    <li><button id="about">About</button></li> || 
+                    <li>Copyright &#9400; 2019 <a href="https://stackoverflow.com/users/10632369/tomerpacific" target="_blank">Tomer Ben-Rachel</a></li>
+                </ul>
+            </div>
+        </div>
 
-   
+        <script src="scripts/fetcherService.js"></script>
+        <script src="scripts/main.js"></script>
+        <script src="scripts/modal.js"></script>
 
-    <footer>
-        <ul>
-            <li><button id="about">About</button></li> || 
-            <li>Copyright &#9400; 2019 <a href="https://stackoverflow.com/users/10632369/tomerpacific" target="_blank">Tomer Ben-Rachel</a></li>
-        </ul>
-    </footer>
-    <script src="scripts/fetcherService.js"></script>
-    <script src="scripts/main.js"></script>
-    <script src="scripts/modal.js"></script>
+    </body>
+    
+    
+    
 </html>

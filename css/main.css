@@ -1,21 +1,38 @@
-.bg {
-    background: url('../assets/bg-opaque.png');
-    height: 100%; 
-    background-position: center;
-    background-repeat: repeat;
-    background-size: contain;
-}
 
-header {
+#site-header {
     text-align: center;
     font-family: 'Fruktur', cursive;
+    grid-area: header;
 }
 
-main {
+#site-content {
     text-align: center;
+    overflow: auto;
+    grid-area: main;
 }
 
-#repositories, footer ul {
+#site-footer {
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    text-align: center;
+    font-family: 'IBM Plex Sans', sans-serif;
+    background-color:rgba(0, 0, 0, 0.41);
+    color:white;
+    grid-area: footer;
+}
+
+#container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-areas: 
+    'header header header'
+    'main main main'
+    'footer footer footer';
+}
+
+#repositories, #site-footer ul {
     list-style: none;
     font-family: 'IBM Plex Sans', sans-serif;
 }
@@ -30,27 +47,18 @@ main {
     color:blue;
 }
 
-footer > ul > li > a {
+#site-footer > ul > li > a {
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
-#repositories > li > div > a:hover, footer > ul > li > a:hover, #about:hover {
+#repositories > li > div > a:hover, #site-footer > ul > li > a:hover, #about:hover {
     color:lightgreen;
 }
 
 
-footer ul li {
+#site-footer ul li {
     display: inline-block;
-}
-
-footer {
-    width: 100%;
-    bottom: 0;
-    position: fixed;
-    text-align: center;
-    font-family: 'IBM Plex Sans', sans-serif;
-    background-color:rgba(0, 0, 0, 0.41);
 }
 
 #about {
@@ -61,5 +69,13 @@ footer {
     font-family: 'IBM Plex Sans', sans-serif;
     cursor: pointer;
     text-decoration: none;
-    color: black;
+    color: white;
+}
+
+.bg {
+    background: url('../assets/bg-opaque.png');
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }

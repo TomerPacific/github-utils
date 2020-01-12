@@ -9,6 +9,7 @@ const CODING_LANGUAGE_CSS_CLASS = 'coding-language';
 let usernameInput = document.getElementById('username_input');
 let repositoriesList = document.getElementById('repositories');
 let searchButton = document.getElementById('github_user_btn');
+let spinner = null;
 
 function setupInputListener() {
     usernameInput.addEventListener("keyup", function(event) {
@@ -26,8 +27,10 @@ function setupInputListener() {
                     return;
                 }
                
-                searchButton.classList.add('spinning');
-                searchButton.innerHTML = '&#8987;';
+                spinner = document.createElement('span');
+                spinner.classList.add('spinning');
+                spinner.innerHTML = '&#8987;';
+                searchButton.appendChild(spinner);
                 
                 parseRepositories(repositories);
             });
@@ -82,7 +85,8 @@ function parseRepositories(repositories) {
                 liElement.appendChild(divElement);
                 repositoriesList.appendChild(liElement);
             }
-
+        }).then(function() {
+            searchButton.removeChild(spinner);
             searchButton.classList.remove('spinning');
             searchButton.innerHTML = 'Search Again?';
         })

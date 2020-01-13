@@ -5,6 +5,10 @@ const FORK_EMOJI = '&#127860;';
 const EYE_EMOJI = '&#x1F441;';
 const ENTER_KEY_CODE = 13;
 const CODING_LANGUAGE_CSS_CLASS = 'coding-language';
+const REPOSITORY_ICONS = {
+    'forks_count': FORK_EMOJI,
+    'watchers': EYE_EMOJI
+};
 
 let usernameInput = document.getElementById('username_input');
 let repositoriesList = document.getElementById('repositories');
@@ -57,17 +61,8 @@ function parseRepositories(repositories) {
 
         addLanguage(repository.language, divElement);
         addCloneButton(repository, divElement);
-        addWatchersIcon(repository, divElement);
-
-        //Repository Stars
-        if (repository.stargazers_count) {
-            addStarToRepository(repository, divElement);
-        }
-
-        //Repository Forks
-        if (repository.forks_count) {
-            addForkToRepository(repository, divElement);
-        }
+        addStarToRepository(repository, divElement);
+        addIconsToRepository(repository, divElement);
 
         liElement.appendChild(divElement);
         repositoriesList.appendChild(liElement);
@@ -75,6 +70,11 @@ function parseRepositories(repositories) {
 }
 
 function addStarToRepository(repository, divElement) {
+
+    if (!repository.stargazers_count) {
+        return;
+    }
+
     let stars = document.createElement('a');
     stars.href = repository.html_url + '/stargazers';
     stars.target = LINK_TARGET_BLANK;
@@ -137,6 +137,19 @@ function addWatchersIcon(repository, divElement) {
     watchersElement.innerHTML = EYE_EMOJI;
     watchersElement.title = repository.watchers;
     divElement.appendChild(watchersElement);
+}
+
+function addIconsToRepository(repository, divElement) {
+   for(let icon in REPOSITORY_ICONS) {
+      if (!repository[icon]) {
+          continue;
+      }
+
+    let spanElement = document.createElement('span');
+    spanElement.innerHTML = REPOSITORY_ICONS[icon];
+    spanElement.title = repository[icon];
+    divElement.appendChild(spanElement);
+   }
 }
 
 

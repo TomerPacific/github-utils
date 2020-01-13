@@ -38,9 +38,9 @@ function setupInputListener() {
 
 function addUserNotFoundIndication(username) {
     let divElement = document.createElement('div');
-    let liElement = document.createElement('li');
-    liElement.innerHTML = "User " + username + " has not been found";
-    divElement.appendChild(liElement);
+    let paragraphElement = document.createElement('p');
+    paragraphElement.innerHTML = "User " + username + " has not been found";
+    divElement.appendChild(paragraphElement);
     repositoriesList.appendChild(divElement);
 }
 
@@ -49,23 +49,24 @@ function parseRepositories(repositories) {
     for (let index = 0; index < repositories.length; index++) {
         let repository = repositories[index];
         let anchorElement = document.createElement('a');
-        let liElement = document.createElement('li');
+        let headerElement = document.createElement('h4');
         let divElement = document.createElement('div');
+        divElement.classList.add('repository');
 
         //Repository Name
         anchorElement.href = repository.html_url;
         anchorElement.target = LINK_TARGET_BLANK;
         anchorElement.innerHTML = repository.name;
         anchorElement.title = repository.description;
-        divElement.appendChild(anchorElement);
+        headerElement.appendChild(anchorElement);
+        divElement.appendChild(headerElement);
 
-        addLanguage(repository.language, divElement);
-        addCloneButton(repository, divElement);
         addStarToRepository(repository, divElement);
         addIconsToRepository(repository, divElement);
+        addLanguage(repository.language, divElement);
+        addCloneButton(repository, divElement);
 
-        liElement.appendChild(divElement);
-        repositoriesList.appendChild(liElement);
+        repositoriesList.appendChild(divElement);
     }
 }
 

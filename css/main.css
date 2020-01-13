@@ -32,17 +32,16 @@
     'footer footer footer';
 }
 
-#repositories, #site-footer ul {
+#site-footer ul {
     list-style: none;
     font-family: 'IBM Plex Sans', sans-serif;
 }
 
-#repositories > li > div {
-    display: flex;
-    justify-content: center;
+#repositories {
+    display: inline-block;
 }
 
-#repositories > li > div > a {
+.repository > h4 > a {
     text-decoration: none;
     color:blue;
 }
@@ -52,7 +51,7 @@
     color: white;
 }
 
-#repositories > li > div > a:hover, #site-footer > ul > li > a:hover, #about:hover {
+.repository > h4 > a:hover, #site-footer > ul > li > a:hover, #about:hover {
     color:lightgreen;
 }
 
@@ -80,20 +79,17 @@
     background-size: contain;
 }
 
-span.spinning {
-    animation-name: spin;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-    animation-direction: linear;
-    position: absolute;
-  }
+.repository {
+    display: inline-block;
+    border: 5px dashed black;
+    width: 120px;
+    height: 100px;
+    font-weight: bold;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    margin: 1%;
+}
 
-  @keyframes spin {
-    from { 
-        transform: rotate(0);
-     }
-
-    to { 
-        transform: rotate(360deg);
-     }
+.repository > a {
+    text-decoration: none;
 }

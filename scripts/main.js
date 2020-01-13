@@ -9,7 +9,6 @@ const CODING_LANGUAGE_CSS_CLASS = 'coding-language';
 let usernameInput = document.getElementById('username_input');
 let repositoriesList = document.getElementById('repositories');
 let searchButton = document.getElementById('github_user_btn');
-let spinner = null;
 
 function setupInputListener() {
     usernameInput.addEventListener("keyup", function(event) {
@@ -26,11 +25,6 @@ function setupInputListener() {
                     searchButton.innerHTML = 'Search Again?';
                     return;
                 }
-               
-                spinner = document.createElement('span');
-                spinner.classList.add('spinning');
-                spinner.innerHTML = '&#8987;';
-                searchButton.appendChild(spinner);
                 
                 parseRepositories(repositories);
             });
@@ -47,10 +41,11 @@ function addUserNotFoundIndication(username) {
 }
 
 function parseRepositories(repositories) {
+
     for (let index = 0; index < repositories.length; index++) {
         let repository = repositories[index];
-        let liElement = document.createElement('li');
         let anchorElement = document.createElement('a');
+        let liElement = document.createElement('li');
         let divElement = document.createElement('div');
 
         //Repository Name
@@ -65,34 +60,17 @@ function parseRepositories(repositories) {
         addWatchersIcon(repository, divElement);
 
         //Repository Stars
-        let stargazersPromise = fetchStargazers(repository.stargazers_url)
-        
+        if (repository.stargazers_count) {
+            addStarToRepository(repository, divElement);
+        }
+
         //Repository Forks
-        let forksPromise = fetchForks(repository.forks_url)
-        
-        Promise.all([stargazersPromise, forksPromise])
-        .then(function(results) {
-            for (let index = 0; index < results.length; index++) {
-                let result = results[index];
-                if (index % 2 === 0 && result > 0) {
-                    addStarToRepository(repository, divElement);
-                }
+        if (repository.forks_count) {
+            addForkToRepository(repository, divElement);
+        }
 
-                if (index % 2 !== 0 && result > 0) {
-                    addForkToRepository(repository, divElement);
-                }
-
-                liElement.appendChild(divElement);
-                repositoriesList.appendChild(liElement);
-            }
-        }).then(function() {
-            searchButton.removeChild(spinner);
-            searchButton.classList.remove('spinning');
-            searchButton.innerHTML = 'Search Again?';
-        })
-        .catch(function(error) {
-            console.error(error);
-        });
+        liElement.appendChild(divElement);
+        repositoriesList.appendChild(liElement);
     }
 }
 

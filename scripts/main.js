@@ -101,6 +101,10 @@ function addLanguage(language, divElement) {
     languageElement.innerHTML = language;
     languageElement.classList.add(CODING_LANGUAGE_CSS_CLASS);
     language = language.replace(/\s/g, ''); //To erase space between coding languages with two words
+    
+    language = language === 'C#' ? 'CSharp' : language;
+    language = language === 'C++' ? 'CPlusPlus' : language;
+    
     languageElement.classList.add(language);
     divElement.appendChild(languageElement);
 }

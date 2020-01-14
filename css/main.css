@@ -55,10 +55,13 @@
     color: white;
 }
 
-.repository > h4 > a:hover, #site-footer > ul > li > a:hover, #about:hover {
+#site-footer > ul > li > a:hover, #about:hover {
     color:lightgreen;
 }
 
+.repository > h4 > a:hover {
+    color: darkseagreen;
+}
 
 #site-footer ul li {
     display: inline-block;

@@ -3,8 +3,13 @@ const LINK_TARGET_BLANK = "_blank";
 const STAR_EMOJI = '&#11088;';
 const FORK_EMOJI = '&#127860;';
 const EYE_EMOJI = '&#x1F441;';
+
 const ENTER_KEY_CODE = 13;
+
 const CODING_LANGUAGE_CSS_CLASS = 'coding-language';
+const C_PLUS_PLUS_CSS_CLASS = 'CPlusPlus';
+const C_SHARP_CSS_CLASS = 'CSharp';
+
 const REPOSITORY_ICONS = {
     'forks_count': FORK_EMOJI,
     'watchers': EYE_EMOJI
@@ -100,13 +105,18 @@ function addLanguage(language, divElement) {
     let languageElement = document.createElement('span');
     languageElement.innerHTML = language;
     languageElement.classList.add(CODING_LANGUAGE_CSS_CLASS);
+
     language = language.replace(/\s/g, ''); //To erase space between coding languages with two words
     
-    language = language === 'C#' ? 'CSharp' : language;
-    language = language === 'C++' ? 'CPlusPlus' : language;
-    
-    languageElement.classList.add(language);
+    handleSpecialCSSClasses(language, languageElement);
     divElement.appendChild(languageElement);
+}
+
+function handleSpecialCSSClasses(codingLanguage, languageElement) {
+    codingLanguage = codingLanguage === 'C#' ? C_SHARP_CSS_CLASS : codingLanguage;
+    codingLanguage = codingLanguage === 'C++' ? C_PLUS_PLUS_CSS_CLASS : codingLanguage;
+    
+    languageElement.classList.add(codingLanguage);
 }
 
 function addCloneButton(repository, divElement) {

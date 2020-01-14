@@ -100,6 +100,7 @@ function addLanguage(language, divElement) {
     let languageElement = document.createElement('span');
     languageElement.innerHTML = language;
     languageElement.classList.add(CODING_LANGUAGE_CSS_CLASS);
+    language = language.replace(/\s/g, ''); //To erase space between coding languages with two words
     languageElement.classList.add(language);
     divElement.appendChild(languageElement);
 }

@@ -37,6 +37,38 @@
     background-color: #3572A5;
 }
 
+.JupyterNotebook {
+    background-color: #DA5B0B;
+}
+
+.Shell {
+    background-color: #89e051;
+}
+
+.CSharp {
+    background-color: #178600; 
+}
+
+.Ruby {
+    background-color: #701516;
+}
+
+.PHP {
+    background-color: #4F5D95;
+}
+
+.CPlusPlus {
+    background-color: #f34b7d;
+}
+
+.OCaml {
+    background-color: #3be133;
+}
+
+.C {
+    background-color: #555555;
+}
+
 .clone {
     background-image: linear-gradient(-180deg,#34d058,#28a745 90%);
     color: white;

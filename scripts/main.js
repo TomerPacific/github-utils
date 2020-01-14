@@ -37,10 +37,9 @@ function setupInputListener() {
 }
 
 function addUserNotFoundIndication(username) {
-    let divElement = document.createElement('div');
     let paragraphElement = document.createElement('p');
     paragraphElement.innerHTML = "User " + username + " has not been found";
-    divElement.appendChild(paragraphElement);
+    repositoriesList.appendChild(paragraphElement);
     repositoriesList.appendChild(divElement);
 }
 

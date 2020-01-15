@@ -72,6 +72,8 @@ function parseRepositories(repositories) {
 
         repositoriesList.appendChild(divElement);
     }
+
+    searchButton.innerHTML = 'Search Again?';
 }
 
 function addStarToRepository(repository, divElement) {

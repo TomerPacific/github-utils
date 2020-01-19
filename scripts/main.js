@@ -119,9 +119,9 @@ function handleSpecialCSSClasses(codingLanguage, languageElement) {
     codingLanguage = codingLanguage === 'C++' ? C_PLUS_PLUS_CSS_CLASS : codingLanguage;
     if (hasCssRule(codingLanguage)) {
         languageElement.classList.add(codingLanguage);
+    } else {
+        languageElement.classList.add('default');
     }
-
-    languageElement.classList.add('default');
     
 }
 

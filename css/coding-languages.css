@@ -73,6 +73,18 @@
     background-color: #0298c3;
 }
 
+.TypeScript {
+    background-color: #2b7489;
+}
+
+.Go {
+    background-color: #00ADD8;
+}
+
+.default {
+    background-color: #b366ff;
+}
+
 .clone {
     background-image: linear-gradient(-180deg,#34d058,#28a745 90%);
     color: white;

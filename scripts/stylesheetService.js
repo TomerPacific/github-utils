@@ -1,13 +1,13 @@
-const CODING_LANGUAGES_STYLESHEET_NAME = 'coding-languages.css';
+const CODING_LANGUAGE_STYLESHEET = document.styleSheets[4];
 
-function getCodingLanguagesStyleSheet() {
-    let chosen = document.styleSheets[4];
-    console.log(chosen);
-    for(let index = 0; index < chosen.cssRules.length; index++) {
-        console.log(chosen.cssRules[index]);
+function hasCssRule(cssRule) {
+    for(let index = 0; index < CODING_LANGUAGE_STYLESHEET.cssRules.length; index++) {
+        let cssRule = CODING_LANGUAGE_STYLESHEET.cssRules[index];
+        if (cssRule.selectorText.substring(1) === cssRule) {
+            console.log('Returning true for ' + cssRule);
+            return true;
+        }
     }
-}
-
-function hasCssRule(styleSheet, cssRule) {
-
+    console.log('Returning false for ' + cssRule);
+    return false;
 }

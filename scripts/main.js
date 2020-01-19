@@ -102,8 +102,6 @@ function addLanguage(language, divElement) {
         return;
     }
 
-    let styleSheet = getCodingLanguagesStyleSheet();
-
     language = language === 'JavaScript' ? 'JS' : language;
 
     let languageElement = document.createElement('span');
@@ -119,8 +117,12 @@ function addLanguage(language, divElement) {
 function handleSpecialCSSClasses(codingLanguage, languageElement) {
     codingLanguage = codingLanguage === 'C#' ? C_SHARP_CSS_CLASS : codingLanguage;
     codingLanguage = codingLanguage === 'C++' ? C_PLUS_PLUS_CSS_CLASS : codingLanguage;
+    if (hasCssRule(codingLanguage)) {
+        languageElement.classList.add(codingLanguage);
+    }
+
+    languageElement.classList.add('default');
     
-    languageElement.classList.add(codingLanguage);
 }
 
 function addCloneButton(repository, divElement) {

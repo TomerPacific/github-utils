@@ -18,12 +18,13 @@ const REPOSITORY_ICONS = {
 let usernameInput = document.getElementById('username_input');
 let repositoriesList = document.getElementById('repositories');
 let searchButton = document.getElementById('github_user_btn');
+let loaderDiv = document.getElementById('loader');
 
 function setupInputListener() {
     usernameInput.addEventListener("keyup", function(event) {
         if (event.keyCode === ENTER_KEY_CODE) {
             event.preventDefault();
-
+            loaderDiv.style.display = 'block';
             while(repositoriesList.firstChild) {
                 repositoriesList.removeChild(repositoriesList.firstChild);
             }
@@ -31,6 +32,7 @@ function setupInputListener() {
             fetchUserRepositories(username).then(function(repositories) {
                 if (repositories.length === 0) {
                     addUserNotFoundIndication(username);
+                    loaderDiv.style.display = 'none';
                     searchButton.innerHTML = 'Search Again?';
                     return;
                 }
@@ -45,7 +47,6 @@ function addUserNotFoundIndication(username) {
     let paragraphElement = document.createElement('p');
     paragraphElement.innerHTML = "User " + username + " has not been found";
     repositoriesList.appendChild(paragraphElement);
-    repositoriesList.appendChild(divElement);
 }
 
 function parseRepositories(repositories) {
@@ -72,7 +73,8 @@ function parseRepositories(repositories) {
 
         repositoriesList.appendChild(divElement);
     }
-
+    
+    loaderDiv.style.display = 'none';
     searchButton.innerHTML = 'Search Again?';
 }
 

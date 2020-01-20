@@ -101,3 +101,8 @@
 .repository > a {
     text-decoration: none;
 }
+
+#loader {
+    display: none;
+    font-weight: bold;
+}

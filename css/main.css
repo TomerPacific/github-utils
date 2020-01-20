@@ -56,11 +56,11 @@
 }
 
 #site-footer > ul > li > a:hover, #about:hover {
-    color:lightgreen;
+    color: #b3d9ff;
 }
 
 .repository > h4 > a:hover {
-    color: darkseagreen;
+    color:  #b3d9ff;
 }
 
 #site-footer ul li {

@@ -123,12 +123,6 @@ function addLanguage(language, divElement) {
     divElement.appendChild(languageElement);
 }
 
-function handleSpecialCSSClasses(codingLanguage) {
-    codingLanguage = codingLanguage === 'C#' ? C_SHARP_CSS_CLASS : codingLanguage;
-    codingLanguage = codingLanguage === 'C++' ? C_PLUS_PLUS_CSS_CLASS : codingLanguage;
-    return codingLanguage;
-}
-
 function addCloneButton(repository, divElement) {
     let cloneElement = document.createElement('button');
     cloneElement.innerHTML = 'Clone';

@@ -112,19 +112,21 @@ function addLanguage(language, divElement) {
 
     language = language.replace(/\s/g, ''); //To erase space between coding languages with two words
     
-    handleSpecialCSSClasses(language, languageElement);
-    divElement.appendChild(languageElement);
-}
+    language = handleSpecialCSSClasses(language);
 
-function handleSpecialCSSClasses(codingLanguage, languageElement) {
-    codingLanguage = codingLanguage === 'C#' ? C_SHARP_CSS_CLASS : codingLanguage;
-    codingLanguage = codingLanguage === 'C++' ? C_PLUS_PLUS_CSS_CLASS : codingLanguage;
-    if (hasCssRule(codingLanguage)) {
-        languageElement.classList.add(codingLanguage);
+    if (hasCssRule(language)) {
+        languageElement.classList.add(language);
     } else {
         languageElement.classList.add('default');
     }
-    
+
+    divElement.appendChild(languageElement);
+}
+
+function handleSpecialCSSClasses(codingLanguage) {
+    codingLanguage = codingLanguage === 'C#' ? C_SHARP_CSS_CLASS : codingLanguage;
+    codingLanguage = codingLanguage === 'C++' ? C_PLUS_PLUS_CSS_CLASS : codingLanguage;
+    return codingLanguage;
 }
 
 function addCloneButton(repository, divElement) {

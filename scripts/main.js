@@ -62,7 +62,7 @@ function parseRepositories(repositories) {
         anchorElement.href = repository.html_url;
         anchorElement.target = LINK_TARGET_BLANK;
         anchorElement.innerHTML = repository.name;
-        anchorElement.title = repository.description;
+        anchorElement.title = repository.description ? repository.description : 'No description exists for repository';
         headerElement.appendChild(anchorElement);
         divElement.appendChild(headerElement);
 

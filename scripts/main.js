@@ -19,11 +19,13 @@ let usernameInput = document.getElementById('username_input');
 let repositoriesList = document.getElementById('repositories');
 let searchButton = document.getElementById('github_user_btn');
 let loaderDiv = document.getElementById('loader');
+let userProfileDiv = document.getElementById('user-profile');
 
 function setupInputListener() {
     usernameInput.addEventListener("keyup", function(event) {
         if (event.keyCode === ENTER_KEY_CODE) {
             event.preventDefault();
+            userProfileDiv.innerHTML = '';
             loaderDiv.style.display = 'block';
             while(repositoriesList.firstChild) {
                 repositoriesList.removeChild(repositoriesList.firstChild);
@@ -36,7 +38,7 @@ function setupInputListener() {
                     searchButton.innerHTML = 'Search Again?';
                     return;
                 }
-                
+                parseUserData(repositories[0].owner);
                 parseRepositories(repositories);
             });
         }
@@ -47,6 +49,17 @@ function addUserNotFoundIndication(username) {
     let paragraphElement = document.createElement('p');
     paragraphElement.innerHTML = "User " + username + " has not been found";
     repositoriesList.appendChild(paragraphElement);
+}
+
+function parseUserData(userData) {
+    let userProfileAvatar = document.createElement('img');
+    userProfileAvatar.src = userData.avatar_url;
+    userProfileAvatar.setAttribute('id', 'user-profile-avatar');
+    let userProfileLink = document.createElement('a');
+    userProfileLink.href = userData.html_url;
+    userProfileLink.target = '_blank';
+    userProfileLink.appendChild(userProfileAvatar);
+    userProfileDiv.appendChild(userProfileLink);
 }
 
 function parseRepositories(repositories) {

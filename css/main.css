@@ -158,3 +158,9 @@
 #user-profile-avatar:hover {
     border: 2px solid var(--clr-accent);
 }
+
+#user-profile > span {
+    margin-right: 0.5em;
+    font-weight: bold;
+    font-size: 1.5em;
+}

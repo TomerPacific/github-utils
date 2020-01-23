@@ -63,12 +63,12 @@ function parseUserData(userData) {
             if (result.length) {
                 if (index === 0) {
                     let followersSpan = document.createElement('span');
-                    followersSpan.innerHTML =  '&#127939; ' + result.length;
+                    followersSpan.innerHTML =  '&#127939;' + result.length;
                     followersSpan.title = 'Followers';
                     userProfileDiv.appendChild(followersSpan);
                 } else if (index === 1) {
                     let followingSpan = document.createElement('span');
-                    followingSpan.innerHTML =  '&#128373; ' + result.length;
+                    followingSpan.innerHTML =  '&#128373;' + result.length;
                     followingSpan.title = 'Following';
                     userProfileDiv.appendChild(followingSpan);
                 }

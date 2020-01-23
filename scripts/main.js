@@ -52,14 +52,30 @@ function addUserNotFoundIndication(username) {
 }
 
 function parseUserData(userData) {
+    fetchFollowers(userData.followers_url).then(function(result) {
+        if (result.length) {
+            userData.amountOfFollowers = result.length;
+        }
+        setUserData(userData);
+    });
+}
+
+function setUserData(userData) {
     let userProfileAvatar = document.createElement('img');
     userProfileAvatar.src = userData.avatar_url;
     userProfileAvatar.setAttribute('id', 'user-profile-avatar');
     let userProfileLink = document.createElement('a');
     userProfileLink.href = userData.html_url;
-    userProfileLink.target = '_blank';
+    userProfileLink.target = LINK_TARGET_BLANK;
     userProfileLink.appendChild(userProfileAvatar);
     userProfileDiv.appendChild(userProfileLink);
+
+    if (userData.amountOfFollowers) {
+        let followersSpan = document.createElement('span');
+        followersSpan.innerHTML =  '&#127939; ' + userData.amountOfFollowers;
+        followersSpan.title = 'Followers';
+        userProfileDiv.appendChild(followersSpan);
+    }
 }
 
 function parseRepositories(repositories) {

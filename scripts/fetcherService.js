@@ -60,3 +60,18 @@ function fetchForks(forks_url) {
         }
     });
 }
+
+function fetchFollowers(followers_url) {
+    request = new XMLHttpRequest();
+    request.open(GET_REQUEST, followers_url);
+    request.send(null);
+
+    return new Promise(function(resolve, reject) {
+        request.onreadystatechange = function() {
+            if (this.readyState === READY_STATE_OK && this.status === RESPONSE_STATUS_OK) {
+                let followers = JSON.parse(this.responseText);
+                resolve(followers);
+            }
+        }
+    });
+}

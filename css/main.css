@@ -1,4 +1,13 @@
 
+:root {
+    --clr-light: #fff;
+    --clr-dark: #000000;
+    --clr-accent: #b3d9ff; 
+    --clr-grid-box-bg: #f2f2f2;  
+}
+
+
+
 #site-header {
     text-align: center;
     font-family: 'Fruktur', cursive;
@@ -18,7 +27,7 @@
     text-align: center;
     font-family: 'IBM Plex Sans', sans-serif;
     background-color:rgba(0, 0, 0, 0.41);
-    color:white;
+    color:var(--clr-light);
     grid-area: footer;
 }
 
@@ -47,20 +56,20 @@
 
 .repository > h4 > a {
     text-decoration: none;
-    color:black;
+    color:var(--clr-dark);
 }
 
 #site-footer > ul > li > a {
     text-decoration: none;
-    color: white;
+    color: var(--clr-light);
 }
 
 #site-footer > ul > li > a:hover, #about:hover {
-    color: #b3d9ff;
+    color: var(--clr-accent);
 }
 
 .repository > h4 > a:hover {
-    color:  #b3d9ff;
+    color:  var(--clr-accent);
 }
 
 #site-footer ul li {
@@ -75,7 +84,7 @@
     font-family: 'IBM Plex Sans', sans-serif;
     cursor: pointer;
     text-decoration: none;
-    color: white;
+    color: var(--clr-light);
 }
 
 .bg {
@@ -88,14 +97,14 @@
 
 .repository {
     display: inline-block;
-    border: 5px dashed black;
+    border: 5px dashed var(--clr-dark);
     width: 120px;
     height: 100px;
     font-weight: bold;
     overflow: hidden;
     overflow-wrap: break-word;
     margin: 1%;
-    background-color:  #f2f2f2;
+    background-color:  var(--clr-grid-box-bg);
 }
 
 .repository > a {
@@ -142,10 +151,10 @@
 #user-profile-avatar {
     width: 100px;
     height: 100px;
-    border: 2px solid black;
+    border: 2px solid var(--clr-dark);
 	border-radius: 50%;
 }
 
 #user-profile-avatar:hover {
-    border: 2px solid #b3d9ff;
+    border: 2px solid var(--clr-accent);
 }

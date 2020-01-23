@@ -52,11 +52,30 @@ function addUserNotFoundIndication(username) {
 }
 
 function parseUserData(userData) {
-    fetchFollowers(userData.followers_url).then(function(result) {
-        if (result.length) {
-            userData.amountOfFollowers = result.length;
-        }
+    let followersPromise = fetchDataFromUrl(userData.followers_url);
+    let followingUrl = extractFollowingUrl(userData.following_url);
+    let followingPromise = fetchDataFromUrl(followingUrl);
+
+    Promise.all([followersPromise, followingPromise]).then(function(results) {
         setUserData(userData);
+        for(let index = 0; index < results.length; index++) {
+            let result = results[index];
+            if (result.length) {
+                if (index === 0) {
+                    let followersSpan = document.createElement('span');
+                    followersSpan.innerHTML =  '&#127939; ' + result.length;
+                    followersSpan.title = 'Followers';
+                    userProfileDiv.appendChild(followersSpan);
+                } else if (index === 1) {
+                    let followingSpan = document.createElement('span');
+                    followingSpan.innerHTML =  '&#128373; ' + result.length;
+                    followingSpan.title = 'Following';
+                    userProfileDiv.appendChild(followingSpan);
+                }
+            }
+        }
+    }).catch(function(error) {
+        console.error("Something went wrong with fetching data " + error);
     });
 }
 
@@ -69,13 +88,11 @@ function setUserData(userData) {
     userProfileLink.target = LINK_TARGET_BLANK;
     userProfileLink.appendChild(userProfileAvatar);
     userProfileDiv.appendChild(userProfileLink);
+}
 
-    if (userData.amountOfFollowers) {
-        let followersSpan = document.createElement('span');
-        followersSpan.innerHTML =  '&#127939; ' + userData.amountOfFollowers;
-        followersSpan.title = 'Followers';
-        userProfileDiv.appendChild(followersSpan);
-    }
+function extractFollowingUrl(url) {
+    let curlyBracketIndex = url.indexOf("{");
+    return url.substring(0, curlyBracketIndex);
 }
 
 function parseRepositories(repositories) {

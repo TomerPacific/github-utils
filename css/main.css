@@ -145,3 +145,7 @@
     border: 2px solid black;
 	border-radius: 50%;
 }
+
+#user-profile-avatar:hover {
+    border: 2px solid #b3d9ff;
+}

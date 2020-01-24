@@ -1,4 +1,6 @@
 const CODING_LANGUAGE_STYLESHEET = document.styleSheets[4];
+const C_PLUS_PLUS_CSS_CLASS = 'CPlusPlus';
+const C_SHARP_CSS_CLASS = 'CSharp';
 
 function hasCssRule(cssRuleToFind) {
     for(let index = 0; index < CODING_LANGUAGE_STYLESHEET.cssRules.length; index++) {

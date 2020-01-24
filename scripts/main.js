@@ -3,12 +3,11 @@ const LINK_TARGET_BLANK = "_blank";
 const STAR_EMOJI = '&#11088;';
 const FORK_EMOJI = '&#127860;';
 const EYE_EMOJI = '&#x1F441;';
+const FOLLOWERS_EMOJI = '&#127939;';
+const FOLLOWING_EMOJI = '&#128373;';
 
 const ENTER_KEY_CODE = 13;
-
 const CODING_LANGUAGE_CSS_CLASS = 'coding-language';
-const C_PLUS_PLUS_CSS_CLASS = 'CPlusPlus';
-const C_SHARP_CSS_CLASS = 'CSharp';
 
 const REPOSITORY_ICONS = {
     'forks_count': FORK_EMOJI,
@@ -62,12 +61,12 @@ function parseUserData(userData) {
             let result = results[index];
             if (index === 0) { //Followers
                 let followersSpan = document.createElement('span');
-                followersSpan.innerHTML =  '&#127939;' + result.length;
+                followersSpan.innerHTML =  FOLLOWERS_EMOJI + result.length;
                 followersSpan.title = 'Followers';
                 userProfileDiv.appendChild(followersSpan);
             } else if (index === 1) { //Following
                 let followingSpan = document.createElement('span');
-                followingSpan.innerHTML =  '&#128373;' + result.length;
+                followingSpan.innerHTML =  FOLLOWING_EMOJI + result.length;
                 followingSpan.title = 'Following';
                 userProfileDiv.appendChild(followingSpan);
             }

@@ -60,18 +60,16 @@ function parseUserData(userData) {
         setUserData(userData);
         for(let index = 0; index < results.length; index++) {
             let result = results[index];
-            if (result.length) {
-                if (index === 0) {
-                    let followersSpan = document.createElement('span');
-                    followersSpan.innerHTML =  '&#127939;' + result.length;
-                    followersSpan.title = 'Followers';
-                    userProfileDiv.appendChild(followersSpan);
-                } else if (index === 1) {
-                    let followingSpan = document.createElement('span');
-                    followingSpan.innerHTML =  '&#128373;' + result.length;
-                    followingSpan.title = 'Following';
-                    userProfileDiv.appendChild(followingSpan);
-                }
+            if (index === 0) { //Followers
+                let followersSpan = document.createElement('span');
+                followersSpan.innerHTML =  '&#127939;' + result.length;
+                followersSpan.title = 'Followers';
+                userProfileDiv.appendChild(followersSpan);
+            } else if (index === 1) { //Following
+                let followingSpan = document.createElement('span');
+                followingSpan.innerHTML =  '&#128373;' + result.length;
+                followingSpan.title = 'Following';
+                userProfileDiv.appendChild(followingSpan);
             }
         }
     }).catch(function(error) {

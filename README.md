@@ -15,3 +15,6 @@ Those details include:
 
 - Copy clone command to the clipboard of a repository
 
+- How many followers the user has
+
+- How many people the user is following

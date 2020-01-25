@@ -1,5 +1,8 @@
 # github-utils
 Using Github APIs to fetch details about repositories for a specific user.
+<p align="center">
+  <img src="https://github.com/TomerPacific/github-utils/blob/master/assets/screenshot.jpg?raw=true" alt="Project Screenshot" width="400px"   height="400px">
+</p>
 
 Those details include:
 

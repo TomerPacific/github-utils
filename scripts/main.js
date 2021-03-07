@@ -30,17 +30,21 @@ function setupInputListener() {
                 repositoriesList.removeChild(repositoriesList.firstChild);
             }
             let username = usernameInput.value;
-            fetchUserRepositories(username).then(function(repositories) {
-                if (repositories.length === 0) {
-                    addUserNotFoundIndication(username);
-                    loaderDiv.style.display = 'none';
-                    searchButton.innerHTML = 'Search Again?';
-                    return;
-                }
-                parseUserData(repositories[0].owner);
-                parseRepositories(repositories);
-            });
+            getUserRepositoriesData(username);
         }
+    });
+}
+
+function getUserRepositoriesData(username) {
+    fetchUserRepositories(username).then(function(repositories) {
+        if (repositories.length === 0) {
+            addUserNotFoundIndication(username);
+            loaderDiv.style.display = 'none';
+            searchButton.innerHTML = 'Search Again?';
+            return;
+        }
+        parseUserData(repositories[0].owner);
+        parseRepositories(repositories);
     });
 }
 

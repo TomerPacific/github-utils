@@ -20,19 +20,30 @@ let searchButton = document.getElementById('github_user_btn');
 let loaderDiv = document.getElementById('loader');
 let userProfileDiv = document.getElementById('user-profile');
 
+let totalAmountOfFollowers = 0;
+
 function setupInputListener() {
     usernameInput.addEventListener("keyup", function(event) {
         if (event.keyCode === ENTER_KEY_CODE) {
             event.preventDefault();
-            userProfileDiv.innerHTML = '';
-            loaderDiv.style.display = 'block';
-            while(repositoriesList.firstChild) {
-                repositoriesList.removeChild(repositoriesList.firstChild);
-            }
-            let username = usernameInput.value;
-            getUserRepositoriesData(username);
+            searchForUserDetails();
         }
     });
+
+    searchButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        searchForUserDetails();
+    });
+}
+
+function searchForUserDetails() {
+    userProfileDiv.innerHTML = '';
+    loaderDiv.style.display = 'block';
+    while(repositoriesList.firstChild) {
+        repositoriesList.removeChild(repositoriesList.firstChild);
+    }
+    let username = usernameInput.value;
+    getUserRepositoriesData(username);
 }
 
 function getUserRepositoriesData(username) {
@@ -43,7 +54,7 @@ function getUserRepositoriesData(username) {
             searchButton.innerHTML = 'Search Again?';
             return;
         }
-        parseUserData(repositories[0].owner);
+        fetchFollowers(repositories[0].owner);
         parseRepositories(repositories);
     });
 }
@@ -54,29 +65,13 @@ function addUserNotFoundIndication(username) {
     repositoriesList.appendChild(paragraphElement);
 }
 
-function parseUserData(userData) {
-    let followersPromise = fetchDataFromUrl(userData.followers_url);
+function fetchFollowing(userData) {
     let followingUrl = extractFollowingUrl(userData.following_url);
-    let followingPromise = fetchDataFromUrl(followingUrl);
-
-    Promise.all([followersPromise, followingPromise]).then(function(results) {
-        setUserData(userData);
-        for(let index = 0; index < results.length; index++) {
-            let result = results[index];
-            if (index === 0) { //Followers
-                let followersSpan = document.createElement('span');
-                followersSpan.innerHTML =  FOLLOWERS_EMOJI + result.length;
-                followersSpan.title = 'Followers';
-                userProfileDiv.appendChild(followersSpan);
-            } else if (index === 1) { //Following
-                let followingSpan = document.createElement('span');
-                followingSpan.innerHTML =  FOLLOWING_EMOJI + result.length;
-                followingSpan.title = 'Following';
-                userProfileDiv.appendChild(followingSpan);
-            }
-        }
-    }).catch(function(error) {
-        console.error("Something went wrong with fetching data " + error);
+    fetchDataFromUrl(followingUrl).then(function(result) {
+        let followingSpan = document.createElement('span');
+        followingSpan.innerHTML =  FOLLOWING_EMOJI + result.length;
+        followingSpan.title = 'Following';
+        userProfileDiv.appendChild(followingSpan);
     });
 }
 
@@ -106,6 +101,24 @@ function addWatchersIcon(repository, divElement) {
     watchersElement.innerHTML = EYE_EMOJI;
     watchersElement.title = repository.watchers;
     divElement.appendChild(watchersElement);
+}
+
+function fetchFollowers(userData, pageNumber) {
+    let urlWithQueryParameters = userData.followers_url + "?per_page=100&page=" + pageNumber;
+    fetchDataFromUrl(urlWithQueryParameters).then(function(result) {
+        if (result.length == 0) {
+            let followersSpan = document.createElement('span');
+            followersSpan.innerHTML =  FOLLOWERS_EMOJI + totalAmountOfFollowers;
+            followersSpan.title = 'Followers';
+            userProfileDiv.appendChild(followersSpan);
+            fetchFollowing(userData);
+        } else {
+            totalAmountOfFollowers+= result.length;
+            return fetchFollowers(userData, ++pageNumber);
+        }
+    }).catch(function(error) {
+        console.error("Something went wrong with fetching data " + error);
+    })
 }
 
 setupInputListener();

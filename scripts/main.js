@@ -26,15 +26,24 @@ function setupInputListener() {
     usernameInput.addEventListener("keyup", function(event) {
         if (event.keyCode === ENTER_KEY_CODE) {
             event.preventDefault();
-            userProfileDiv.innerHTML = '';
-            loaderDiv.style.display = 'block';
-            while(repositoriesList.firstChild) {
-                repositoriesList.removeChild(repositoriesList.firstChild);
-            }
-            let username = usernameInput.value;
-            getUserRepositoriesData(username);
+            searchForUserDetails();
         }
     });
+
+    searchButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        searchForUserDetails();
+    });
+}
+
+function searchForUserDetails() {
+    userProfileDiv.innerHTML = '';
+    loaderDiv.style.display = 'block';
+    while(repositoriesList.firstChild) {
+        repositoriesList.removeChild(repositoriesList.firstChild);
+    }
+    let username = usernameInput.value;
+    getUserRepositoriesData(username);
 }
 
 function getUserRepositoriesData(username) {

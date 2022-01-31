@@ -54,7 +54,7 @@ function getUserRepositoriesData(username) {
             searchButton.innerHTML = 'Search Again?';
             return;
         }
-        fetchFollowers(repositories[0].owner);
+        fetchFollowers(repositories[0].owner, 1);
         parseRepositories(repositories);
     });
 }

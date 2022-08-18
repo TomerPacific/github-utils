@@ -98,6 +98,11 @@ function addCloneButton(repository, divElement) {
 }
 
 function addForkIcon(repository, divElement) {
+
+    if (repository['forks'] == 0) {
+        return;
+    }
+
     let spanElement = document.createElement('span');
     spanElement.innerHTML = FORK_EMOJI;
     spanElement.title = repository['forks'];
@@ -114,7 +119,7 @@ function getAndSetAmountOfWatchers(repository, divElement) {
 
     fetchDataFromUrl(watchersUrl).then(function(result) {
 
-        if (result == undefined || result.length == 0) {
+        if (result == undefined || result.length <= 1) {
             return;
         }
 

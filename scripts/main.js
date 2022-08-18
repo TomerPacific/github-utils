@@ -9,11 +9,6 @@ const FOLLOWING_EMOJI = '&#128373;';
 const ENTER_KEY_CODE = 13;
 const CODING_LANGUAGE_CSS_CLASS = 'coding-language';
 
-const REPOSITORY_ICONS = {
-    'forks_count': FORK_EMOJI,
-    'watchers': EYE_EMOJI
-};
-
 let usernameInput = document.getElementById('username_input');
 let repositoriesList = document.getElementById('repositories');
 let searchButton = document.getElementById('github_user_btn');

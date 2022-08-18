@@ -17,11 +17,21 @@ function parseRepositories(repositories) {
         divElement.appendChild(headerElement);
 
         addStarToRepository(repository, divElement);
-        addIconsToRepository(repository, divElement);
-        addLanguage(repository.language, divElement);
-        addCloneButton(repository, divElement);
+        addForkIcon(repository, divElement);
+        getAmountOfWatchers(repository).then(function(result) {
 
-        repositoriesList.appendChild(divElement);
+            if (result != undefined && result.length > 1) {
+                let spanElement = document.createElement('span');
+                spanElement.innerHTML = EYE_EMOJI;
+                spanElement.title = result.length;
+                divElement.appendChild(spanElement);
+            }
+
+            addLanguage(repository.language, divElement);
+            addCloneButton(repository, divElement);
+
+            repositoriesList.appendChild(divElement);
+        });
     }
     
     loaderDiv.style.display = 'none';
@@ -96,15 +106,25 @@ function addCloneButton(repository, divElement) {
     divElement.appendChild(cloneElement);
 }
 
-function addIconsToRepository(repository, divElement) {
-    for(let icon in REPOSITORY_ICONS) {
-       if (!repository[icon]) {
-           continue;
-       }
- 
-     let spanElement = document.createElement('span');
-     spanElement.innerHTML = REPOSITORY_ICONS[icon];
-     spanElement.title = repository[icon];
-     divElement.appendChild(spanElement);
+function addForkIcon(repository, divElement) {
+
+    if (repository['forks'] == 0) {
+        return;
     }
+
+    let spanElement = document.createElement('span');
+    spanElement.innerHTML = FORK_EMOJI;
+    spanElement.title = repository['forks'];
+    divElement.appendChild(spanElement);
+}
+
+function getAmountOfWatchers(repository) {
+
+    if (!repository || !repository['subscribers_url']) {
+        return;
+    }
+
+    let watchersUrl = repository['subscribers_url'];
+
+    return fetchDataFromUrl(watchersUrl);
 }

@@ -17,7 +17,8 @@ function parseRepositories(repositories) {
         divElement.appendChild(headerElement);
 
         addStarToRepository(repository, divElement);
-        addIconsToRepository(repository, divElement);
+        addForkIcon(repository, divElement);
+        getAndSetAmountOfWatchers(repository, divElement);
         addLanguage(repository.language, divElement);
         addCloneButton(repository, divElement);
 
@@ -96,15 +97,30 @@ function addCloneButton(repository, divElement) {
     divElement.appendChild(cloneElement);
 }
 
-function addIconsToRepository(repository, divElement) {
-    for(let icon in REPOSITORY_ICONS) {
-       if (!repository[icon]) {
-           continue;
-       }
- 
-     let spanElement = document.createElement('span');
-     spanElement.innerHTML = REPOSITORY_ICONS[icon];
-     spanElement.title = repository[icon];
-     divElement.appendChild(spanElement);
+function addForkIcon(repository, divElement) {
+    let spanElement = document.createElement('span');
+    spanElement.innerHTML = FORK_EMOJI;
+    spanElement.title = repository['forks'];
+    divElement.appendChild(spanElement);
+}
+
+function getAndSetAmountOfWatchers(repository, divElement) {
+
+    if (!repository || !repository['subscribers_url']) {
+        return;
     }
+
+    let watchersUrl = repository['subscribers_url'];
+
+    fetchDataFromUrl(watchersUrl).then(function(result) {
+
+        if (result == undefined || result.length == 0) {
+            return;
+        }
+
+        let spanElement = document.createElement('span');
+        spanElement.innerHTML = EYE_EMOJI;
+        spanElement.title = result.length;
+        divElement.appendChild(spanElement);
+    });
 }

@@ -116,4 +116,11 @@ function fetchFollowers(userData, pageNumber) {
     })
 }
 
+function setCopyrightYear() {
+    const copyrightSpan = document.getElementById("copyright");
+    const currentYear = new Date().getFullYear();
+    copyrightSpan.innerHTML += currentYear + " ";
+}
+
+setCopyrightYear();
 setupInputListener();
